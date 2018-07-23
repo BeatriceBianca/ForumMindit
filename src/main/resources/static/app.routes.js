@@ -25,6 +25,15 @@
 
                 }
             })
+            .state('authentication', {
+                url: '/authentication',
+                parent: 'main',
+                templateUrl: './components/Log&Reg/views/log&reg.html',
+                controller: 'Log&RegController as lrCtrl',
+                params: {
+
+                }
+            })
 
 
     }
