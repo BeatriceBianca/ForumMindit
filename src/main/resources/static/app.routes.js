@@ -22,9 +22,10 @@
                 templateUrl: './components/home/views/home.html',
                 controller: 'HomeController as homeCtrl',
                 params: {
-                    isLogin: true
+
                 }
             })
+
 
     }
 
