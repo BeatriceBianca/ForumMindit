@@ -7,14 +7,10 @@
         .config(Config);
 
     Config.$inject = [
-        '$stateProvider',
-        '$urlRouterProvider',
-        '$locationProvider'
+        '$stateProvider'
     ];
 
-    function Config($stateProvider,
-                    $urlRouterProvider,
-                    $locationProvider) {
+    function Config($stateProvider) {
 
         $stateProvider
             .state('main', {

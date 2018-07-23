@@ -14,8 +14,6 @@
     function Controller($scope,
                         $state) {
 
-        var vm = this;
-
     }
 
 })();

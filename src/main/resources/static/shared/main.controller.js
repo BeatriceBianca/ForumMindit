@@ -18,8 +18,6 @@
                         $transitions,
                         $state) {
 
-        var vm = this;
-
         $state.go('home', true);
     }
 
