@@ -43,6 +43,8 @@
                 .login(user)
                 .then(function(response){
                     alert("Login succeded");
+                    $('#myModal').modal('toggle');
+                    $state.go("profilepage",true);
 
                 }, function () {
                     alert("Gresit!")
