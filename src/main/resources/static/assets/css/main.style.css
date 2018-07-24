@@ -2,3 +2,33 @@ html, body {
     width: 100%;
     height: 100%;
 }
+
+.lr{
+    height: 100%;
+    width: 100%;
+    margin: 0;
+    background: url("/assets/images/logo.png") no-repeat center center fixed;
+    background-color: #95A5A6;
+    background-size: contain;
+    background-position: center;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
+}
+
+.full{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.cen{
+    text-align: center;
+    transform: translatey(800%);
+}
+
+.disp{
+    display: inline-block;
+    margin-left: 50px;
+
+}

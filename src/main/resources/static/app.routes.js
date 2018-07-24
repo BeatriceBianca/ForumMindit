@@ -25,6 +25,15 @@
 
                 }
             })
+            .state('authentication', {
+                url: '/authentication',
+                parent: 'main',
+                templateUrl: './components/LogReg/views/logreg.html',
+                controller: 'LogRegController as lrCtrl',
+                params: {
+
+                }
+            })
 
 
     }

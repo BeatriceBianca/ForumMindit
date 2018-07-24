@@ -7,7 +7,8 @@ import java.util.Optional;
 
 public interface UserDAO {
 
-    Optional<UserDTO> getUserByUserName(String userName);
-
+//    Optional<UserDTO> getUserByUserName(String userName);
+    void registerUser(UserDTO user);
+    Optional<UserDTO> getUserByUserNameAndPassword(String userName, String password);
 
 }
