@@ -9,15 +9,26 @@ html, body {
     margin: 0;
     background: url("/assets/images/logo.png") no-repeat center center fixed;
     background-color: #95A5A6;
-    background-size: cover;
+    background-size: contain;
     background-position: center;
-    -webkit-background-size: cover;
-    -moz-background-size: cover;
-    -o-background-size: cover;
+    -webkit-background-size: contain;
+    -moz-background-size: contain;
+    -o-background-size: contain;
 }
 
 .full{
     height: 100%;
     margin: 0;
     padding: 0;
+}
+
+.cen{
+    text-align: center;
+    transform: translatey(800%);
+}
+
+.disp{
+    display: inline-block;
+    margin-left: 50px;
+
 }

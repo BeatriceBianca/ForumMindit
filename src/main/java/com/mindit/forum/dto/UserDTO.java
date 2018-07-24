@@ -6,6 +6,15 @@ public class UserDTO {
     private String userName;
     private String firstName;
     private String lastName;
+    private String password;
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
     public UserDTO() {};
 

@@ -28,8 +28,8 @@
             .state('authentication', {
                 url: '/authentication',
                 parent: 'main',
-                templateUrl: './components/Log&Reg/views/log&reg.html',
-                controller: 'Log&RegController as lrCtrl',
+                templateUrl: './components/LogReg/views/logreg.html',
+                controller: 'LogRegController as lrCtrl',
                 params: {
 
                 }
