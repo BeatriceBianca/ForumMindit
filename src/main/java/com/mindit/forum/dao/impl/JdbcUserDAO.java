@@ -41,7 +41,7 @@ public class JdbcUserDAO implements UserDAO{
 //
 //        UserDTO userDTO = null;
 //        try {
-//            userDTO = jdbcTemplate.queryForObject(sqlSelect, namedParameters, new UserDTOMapper());
+//            userDTO = namedJdbcTemplate.queryForObject(sqlSelect, namedParameters, new UserDTOMapper());
 //        } catch (EmptyResultDataAccessException ignored) {
 //
 //        }
