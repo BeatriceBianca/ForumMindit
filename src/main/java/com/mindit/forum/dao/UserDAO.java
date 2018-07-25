@@ -9,5 +9,4 @@ public interface UserDAO {
 
     Optional<UserDTO> getUserByUserName(String userName);
 
-
 }

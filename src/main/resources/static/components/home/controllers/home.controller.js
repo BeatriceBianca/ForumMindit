@@ -8,11 +8,38 @@
 
     Controller.$inject = [
         '$scope',
-        '$state'
+        '$state',
+        '$http',
+        'HomeService'
     ];
 
     function Controller($scope,
-                        $state) {
+                        $state,
+                        $http,
+                        HomeService) {
+
+        var vm = this;
+
+        function init(){
+
+            HomeService.bringQuestions()
+                .then(function(response){
+                    vm.Questions = response.data;
+            })
+
+        }
+        init();
+
+
+
+        vm.modal = function (question) {
+            vm.selectedQuestion = question;
+            HomeService.getAnswers(question.id)
+                .then(function(response){
+                    vm.Answers = response.data;
+                })
+
+        }
 
     }
 
