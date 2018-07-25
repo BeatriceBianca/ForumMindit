@@ -25,6 +25,24 @@
 
                 }
             })
+            .state('authentication', {
+                url: '/authentication',
+                parent: 'main',
+                templateUrl: './components/LogReg/views/logreg.html',
+                controller: 'LogRegController as lrCtrl',
+                params: {
+
+                }
+            })
+            .state('profilepage', {
+                url: '/profilepage',
+                parent: 'main',
+                templateUrl: './components/profilepage/views/profilepage.html',
+                controller: 'ProfilePageController as ppCtrl',
+                params: {
+
+                }
+            })
 
 
     }

@@ -1,4 +1,4 @@
-package com.mindit.forum.controller;
+package com.mindit.forum.controllers;
 
 import com.mindit.forum.dto.QuestionDTO;
 import com.mindit.forum.service.QuestionService;

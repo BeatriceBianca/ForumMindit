@@ -1,27 +1,29 @@
 package com.mindit.forum.dto;
 
+
 import java.util.List;
 
 public class QuestionDTO {
 
-    private int id;
+    private int questId;
+    private String userName;
     private String questText;
 
-
-    public QuestionDTO() {};
-
-    public QuestionDTO(int id, String questText) {
-        this.id = id;
-        this.questText = questText;
+    public String getUserName() {
+        return userName;
     }
 
-
-    public int getId() {
-        return id;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    public int getQuestId() {
+        return questId;
+    }
+
+    public void setQuestId(int questId) {
+        this.questId = questId;
+
     }
 
     public String getQuestText() {
@@ -31,4 +33,14 @@ public class QuestionDTO {
     public void setQuestText(String questText) {
         this.questText = questText;
     }
+
+
+    public QuestionDTO(int questId, String userName, String questText) {
+        this.questId = questId;
+        this.userName = userName;
+        this.questText = questText;
+    }
+
+    public QuestionDTO(){}
+
 }

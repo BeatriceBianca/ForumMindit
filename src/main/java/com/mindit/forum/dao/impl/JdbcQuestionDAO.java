@@ -5,18 +5,14 @@ import com.mindit.forum.dto.QuestionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
-import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
-import org.springframework.jdbc.support.rowset.SqlRowSet;
 import org.springframework.stereotype.Repository;
-
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.Optional;
+
 
 @Repository
 public class JdbcQuestionDAO implements QuestionDAO {
@@ -40,7 +36,7 @@ public class JdbcQuestionDAO implements QuestionDAO {
             List<QuestionDTO> listOfQuestions = new ArrayList<QuestionDTO>();
             for(Map row:rows) {
                 QuestionDTO question = new QuestionDTO();
-                question.setId((int)(row.get("quest_id")));
+                question.setQuestId((int)(row.get("quest_id")));
                 question.setQuestText((String)(row.get("quest_text")));
                 listOfQuestions.add(question);}
             return listOfQuestions;
@@ -84,5 +80,80 @@ public class JdbcQuestionDAO implements QuestionDAO {
    }
 
 
+
+    @Autowired
+    NamedParameterJdbcTemplate namedJdbcTemplate;
+
+    @Override
+    public void addQuest(QuestionDTO quest) {
+        String sqlInsert = "" +
+                "INSERT INTO question(username, quest_text) VALUES( " +
+                "    :userName ,"+
+                "    :questText " +
+                ")";
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        String a = quest.getQuestText();
+        String b = quest.getUserName();
+        namedParameters.addValue("questText", quest.getQuestText());
+        namedParameters.addValue("userName", quest.getUserName());
+
+        namedJdbcTemplate.update(sqlInsert, namedParameters);
+
+    }
+
+    @Override
+    public List<QuestionDTO> getAllQuestions(){
+
+        String sqlSelect = "" +
+                "SELECT " +
+                "   * " +
+                "FROM question ";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+
+        return namedJdbcTemplate.execute(sqlSelect, namedParameters, preparedStatement -> {
+
+            ResultSet rs = preparedStatement.executeQuery();
+            List<QuestionDTO> results = new ArrayList<>();
+            while(rs.next()) {
+                QuestionDTO quest = new QuestionDTO();
+                int a =  rs.getInt("quest_id");
+                String s = rs.getString("quest_text");
+                quest.setQuestId(a);
+                quest.setQuestText(s);
+                quest.setUserName(rs.getString("userName"));
+                results.add(quest);
+            }
+            return results;
+
+        });
+    }
+
+    @Override
+    public List<QuestionDTO> getUserQuestions(String userName){
+
+        String sqlSelect = "" +
+                "SELECT " +
+                "   * " +
+                "FROM question " +
+                "WHERE username =  :userName";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("userName", userName);
+
+        return namedJdbcTemplate.execute(sqlSelect, namedParameters, preparedStatement -> {
+            ResultSet rs = preparedStatement.executeQuery();
+            List<QuestionDTO> results = new ArrayList<>();
+            while(rs.next()) {
+                QuestionDTO quest = new QuestionDTO();
+                quest.setQuestId(rs.getInt("quest_id"));
+                quest.setQuestText(rs.getString("quest_text"));
+                quest.setUserName(rs.getString("username"));
+                results.add(quest);
+            }
+            return results;
+        });
+
+    }
 
 }

@@ -1,0 +1,4 @@
+ALTER TABLE answer
+ADD CONSTRAINT FK_QId
+FOREIGN KEY (q_id) REFERENCES question(quest_id);
+

@@ -18,7 +18,7 @@
                         $transitions,
                         $state) {
 
-        $state.go('home', true);
+        $state.go('authentication', true);
     }
 
 })();

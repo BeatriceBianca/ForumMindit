@@ -34,7 +34,7 @@
 
         vm.modal = function (question) {
             vm.selectedQuestion = question;
-            HomeService.getAnswers(question.id)
+            HomeService.getAnswers(question.questId)
                 .then(function(response){
                     vm.Answers = response.data;
                 })
