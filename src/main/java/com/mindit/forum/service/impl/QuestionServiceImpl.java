@@ -24,4 +24,6 @@ public class QuestionServiceImpl implements QuestionService {
     public List<QuestionDTO> getAllQuestions(){
         return questionDAO.getAllQuestions();
     }
+
+    public List<QuestionDTO> getUserQuestions(String userName) { return questionDAO.getUserQuestions(userName);}
 }

@@ -8,4 +8,5 @@ public interface QuestionService {
 
     Boolean addQuest(QuestionDTO question);
     List<QuestionDTO> getAllQuestions();
+    List<QuestionDTO> getUserQuestions(String userName);
 }

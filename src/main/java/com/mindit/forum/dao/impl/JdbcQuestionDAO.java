@@ -21,11 +21,15 @@ public class JdbcQuestionDAO implements QuestionDAO {
     @Override
     public void addQuest(QuestionDTO quest) {
         String sqlInsert = "" +
-                "INSERT INTO question(quest_text) VALUES( " +
+                "INSERT INTO question(username, quest_text) VALUES( " +
+                "    :userName ,"+
                 "    :questText " +
                 ")";
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        String a = quest.getQuestText();
+        String b = quest.getUserName();
         namedParameters.addValue("questText", quest.getQuestText());
+        namedParameters.addValue("userName", quest.getUserName());
 
         jdbcTemplate.update(sqlInsert, namedParameters);
 
@@ -51,10 +55,38 @@ public class JdbcQuestionDAO implements QuestionDAO {
                 String s = rs.getString("quest_text");
                 quest.setQuestId(a);
                 quest.setQuestText(s);
+                quest.setUserName(rs.getString("userName"));
                 results.add(quest);
             }
             return results;
 
         });
+    }
+
+    @Override
+    public List<QuestionDTO> getUserQuestions(String userName){
+
+        String sqlSelect = "" +
+                "SELECT " +
+                "   * " +
+                "FROM question " +
+                "WHERE username =  :userName";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("userName", userName);
+
+        return jdbcTemplate.execute(sqlSelect, namedParameters, preparedStatement -> {
+            ResultSet rs = preparedStatement.executeQuery();
+            List<QuestionDTO> results = new ArrayList<>();
+            while(rs.next()) {
+                QuestionDTO quest = new QuestionDTO();
+                quest.setQuestId(rs.getInt("quest_id"));
+                quest.setQuestText(rs.getString("quest_text"));
+                quest.setUserName(rs.getString("username"));
+                results.add(quest);
+            }
+            return results;
+        });
+
     }
 }

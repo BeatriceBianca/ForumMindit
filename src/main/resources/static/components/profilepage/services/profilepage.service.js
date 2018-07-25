@@ -14,9 +14,24 @@
 
             }
 
+            function addAns(answer){
+                return $http.put("/answer",answer);
+            }
+
+            function answer(id){
+                return $http.get("/getAnswer?questId=" + id, null);
+            }
+
+            function myquest(userName){
+                return $http.get("/userquest?userName=" + userName, null);
+            }
+
             return {
                 addQuest: addQuest,
-                find: find
+                find: find,
+                addAns: addAns,
+                answer: answer,
+                myquest: myquest
             };
 
         }]);
