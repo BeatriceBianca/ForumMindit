@@ -34,6 +34,15 @@
 
                 }
             })
+            .state('profilepage', {
+                url: '/profilepage',
+                parent: 'main',
+                templateUrl: './components/profilepage/views/profilepage.html',
+                controller: 'ProfilePageController as ppCtrl',
+                params: {
+
+                }
+            })
 
 
     }

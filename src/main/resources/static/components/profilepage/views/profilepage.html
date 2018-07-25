@@ -1,0 +1,75 @@
+<div class="pp" ng-click="ppCtrl.del()">
+
+    <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary poz">Add question</button>
+    <button type="button" class="btn btn-primary poz" ng-click="ppCtrl.showAll()">Show all</button>
+    <button type="button" class="btn btn-primary poz" ng-click="ppCtrl.myQuest()">My questions</button>
+
+    <div data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.questions" class="rep" ng-click="ppCtrl.modal(quest)">
+        <div >
+            {{ quest.questText}}
+        </div>
+
+    </div>
+
+    <div data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.myquestions" class="rep" ng-click="ppCtrl.modal(quest)">
+        <div >
+            {{ quest.questText}}
+        </div>
+
+    </div>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Add a question</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                    <p>Your question</p>
+                    <textarea class="form-control" rows="5" id="comment" ng-model="ppCtrl.quest"></textarea>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click = "ppCtrl.addQuest()" >Add</button>
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div id="myModal1" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">{{ ppCtrl.selectedQuest.questText }}</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body" >
+                    <div ng-repeat="an in ppCtrl.answers">
+                        <p>{{ an.userName }}: {{ an.ansText}} </p>
+                    </div>
+
+                    <div ng-repeat="an in ppCtrl.answers">
+                        <p>{{ an.userName }}: {{ an.ansText}} </p>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-success" ng-click="ppCtrl.addAns()">Add answer</button>
+                    <textarea class="form-control" rows="1" id="comment1" ng-model="ppCtrl.ans"></textarea>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

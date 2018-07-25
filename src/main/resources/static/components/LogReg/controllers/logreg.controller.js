@@ -8,11 +8,13 @@
 
     Controller.$inject = [
         '$scope',
+        '$rootScope',
         '$state',
         'LogRegService'
     ];
 
     function Controller($scope,
+                        $rootScope,
                         $state, LogRegService) {
 
         var vm = this;
@@ -43,6 +45,9 @@
                 .login(user)
                 .then(function(response){
                     alert("Login succeded");
+                    $rootScope.usr = vm.luserName;
+                    $('#myModal').modal('toggle');
+                    $state.go("profilepage",true);
 
                 }, function () {
                     alert("Gresit!")
