@@ -10,17 +10,20 @@
         '$scope',
         '$rootScope',
         '$state',
-        'ProfilePageService'
+        'ProfilePageService',
+        'SharedService'
     ];
 
     function Controller($scope,
                         $rootScope,
                         $state,
-                        ProfilePageService) {
+                        ProfilePageService,
+                        SharedService) {
 
         var vm = this;
         function init(){
             alert($rootScope.usr);
+            vm.editMode = false;
         }
         init();
 
@@ -31,7 +34,7 @@
                 questText: vm.quest
             }
 
-            ProfilePageService.addQuest(question)
+            SharedService.addQuest(question)
                 .then(function (response) {
                     alert("Question added");
                     vm.quest = "";
@@ -49,7 +52,7 @@
                 ansText: vm.ans
             }
 
-            ProfilePageService.addAns(answer)
+            SharedService.addAns(answer)
                 .then(function(response){
                     alert("Answer added");
                     vm.ans = "";
@@ -63,7 +66,18 @@
                 .then(function (response) {
                     vm.questions = response.data;
                     vm.myquestions = "";
+                    vm.shw = false;
                 })
+        }
+
+        vm.deleteQuestion = function(){
+            var question = vm.selectedQuest;
+            ProfilePageService.deleteQuestion(question)
+                .then(function (response) {
+                    alert("Delete");
+                }, function (reason) {
+                    alert("Error");
+                });
         }
 
         vm.modal = function(quest){
@@ -74,17 +88,39 @@
                 })
         }
 
-        vm.del = function(){
-            vm.answers = "";
-        }
+
+        $(document).ready(function(){
+
+            $("#myModal1").on('hide.bs.modal', function () {
+
+                vm.answers = "";
+
+            });
+        });
 
         vm.myQuest = function(){
              ProfilePageService.myquest($rootScope.usr)
                  .then(function (response) {
                      vm.myquestions = response.data;
                      vm.questions = "";
+                     vm.shw = true;
 
                  })
+        }
+
+        vm.enableEditMode = function(){
+
+            vm.editMode = true;
+            alert(vm.editMode);
+        }
+
+        vm.update = function () {
+
+            ProfilePageService.updateQuestion(vm.selectedQuest)
+                .then(function (response) {
+                    vm.editMode = false;
+                });
+
         }
 
     }

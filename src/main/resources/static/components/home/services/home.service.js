@@ -14,11 +14,17 @@
                 return $http.get('/answers?id=' + id , null);
             }
 
+            function find(){
+                return $http.get("/allquest",null);
+
+            }
+
 
             return {
 
                 bringQuestions:  bringQuestions,
-                getAnswers: getAnswers
+                getAnswers: getAnswers,
+                find: find
 
             };
 
