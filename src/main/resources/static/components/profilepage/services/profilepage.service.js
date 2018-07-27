@@ -23,8 +23,17 @@
                 return $http.post("/delete",question);
             }
 
-            function updateQuestion(question){
+            function updateQuestion(question) {
                 return $http.post("/updateQuest", question);
+            }
+
+
+            function myAnsQuest(username){
+                return $http.get("/myQuestions?username=" + username , null);
+            }
+
+            function search(input){
+                return $http.get("/search?input=" + input , null);
             }
 
             return {
@@ -32,7 +41,9 @@
                 answer: answer,
                 myquest: myquest,
                 deleteQuestion: deleteQuestion,
-                updateQuestion: updateQuestion
+                updateQuestion: updateQuestion,
+                myAnsQuest: myAnsQuest,
+                search: search
             };
 
         }]);

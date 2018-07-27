@@ -1,6 +1,7 @@
 package com.mindit.forum.dao.impl;
 
 import com.mindit.forum.dao.QuestionDAO;
+import com.mindit.forum.dto.AnswerDTO;
 import com.mindit.forum.dto.QuestionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
@@ -185,6 +186,95 @@ public class JdbcQuestionDAO implements QuestionDAO {
         namedParameters.addValue("questText", questionDTO.getQuestText());
 
         namedJdbcTemplate.update(sqlUpdate,namedParameters);
+    }
+
+
+    @Override
+    public List<QuestionDTO> getMyQuestions(String userName){
+
+        String sqlSelect = "" +
+                "SELECT " +
+                "    * " +
+                "FROM question q, answer a " +
+                " WHERE  a.q_id = q.quest_id " +
+                " AND a.username = :userName ";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("userName", userName);
+
+        return namedJdbcTemplate.execute(sqlSelect, namedParameters, preparedStatement -> {
+            ResultSet rs = preparedStatement.executeQuery();
+            List<QuestionDTO> results = new ArrayList<>();
+            while(rs.next()) {
+
+                boolean ok = false;
+
+                for( QuestionDTO q: results ){
+                    if( q.getQuestId() == rs.getInt("quest_id") )
+                    {
+                        ok = true;
+
+                        AnswerDTO ans = new AnswerDTO();
+                        ans.setAnsId(rs.getInt("ans_id"));
+                        ans.setqId(rs.getInt("q_id"));
+                        ans.setUserName(rs.getString("username"));
+                        ans.setAnsText(rs.getString("ans_text"));
+                        q.getAnswers().add(ans);
+                    }
+
+                }
+
+                if(ok == false) {
+                    QuestionDTO quest = new QuestionDTO();
+                    quest.setQuestId(rs.getInt("quest_id"));
+                    quest.setQuestText(rs.getString("quest_text"));
+                    quest.setUserName(rs.getString("username"));
+
+                    AnswerDTO ans = new AnswerDTO();
+                    ans.setAnsId(rs.getInt("ans_id"));
+                    ans.setqId(rs.getInt("q_id"));
+                    ans.setUserName(rs.getString("username"));
+                    ans.setAnsText(rs.getString("ans_text"));
+                    quest.getAnswers().add(ans);
+                    results.add(quest);
+                }
+
+
+            }
+            return results;
+        });
+
+    }
+
+
+    @Override
+    public List<QuestionDTO> search(String input){
+
+        String sqlSelect = "" +
+                "SELECT " +
+                "    * " +
+                "FROM question " +
+                "WHERE quest_text " +
+                "LIKE '%" + input +"%'";
+
+        try {
+
+            List<Map<String, Object>> rows = jdbcTemplate.queryForList(sqlSelect);
+            List<QuestionDTO> result = new ArrayList<QuestionDTO>();
+            for(Map row:rows) {
+                QuestionDTO question = new QuestionDTO();
+                question.setQuestId((int)(row.get("quest_id")));
+                question.setUserName((String)(row.get("username")));
+                question.setQuestText((String)(row.get("quest_text")));
+                result.add(question);
+            }
+            return result;
+
+        } catch (EmptyResultDataAccessException ignored) {
+        }
+
+        return null;
+
     }
 
 }

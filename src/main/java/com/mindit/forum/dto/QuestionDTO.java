@@ -1,6 +1,7 @@
 package com.mindit.forum.dto;
 
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class QuestionDTO {
@@ -8,6 +9,11 @@ public class QuestionDTO {
     private int questId;
     private String userName;
     private String questText;
+    private List<AnswerDTO> answers = new ArrayList<>();
+
+    public List<AnswerDTO> getAnswers() {
+        return answers;
+    }
 
     public String getUserName() {
         return userName;

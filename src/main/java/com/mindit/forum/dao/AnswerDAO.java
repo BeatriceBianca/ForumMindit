@@ -8,4 +8,5 @@ public interface AnswerDAO {
 
     void addAns(AnswerDTO answerDTO);
     List<AnswerDTO> getAllAnswers(int id);
+
 }

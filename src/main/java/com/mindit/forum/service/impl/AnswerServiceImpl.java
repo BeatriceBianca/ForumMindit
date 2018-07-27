@@ -24,4 +24,5 @@ public class AnswerServiceImpl implements AnswerService {
 
         return answerDAO.getAllAnswers(id);
     }
+
 }

@@ -21,11 +21,25 @@
                         SharedService) {
 
         var vm = this;
+
         function init(){
             alert($rootScope.usr);
             vm.editMode = false;
         }
         init();
+
+        vm.search = function(){
+
+            ProfilePageService.search(vm.input)
+                .then(function (response) {
+                    vm.result = response.data;
+                    vm.questions = "";
+                    vm.myquestions = "";
+                    vm.myAnsQuests = "";
+
+                })
+
+        }
 
         vm.addQuest = function(){
 
@@ -67,6 +81,9 @@
                     vm.questions = response.data;
                     vm.myquestions = "";
                     vm.shw = false;
+                    vm.myAnsQuests = "";
+                    vm.result = "";
+                    vm.show = true;
                 })
         }
 
@@ -122,6 +139,18 @@
                 });
 
         }
+
+        vm.myAnsQuest = function(){
+            ProfilePageService.myAnsQuest($rootScope.usr)
+                .then(function(response){
+                    vm.myAnsQuests = response.data;
+                    vm.myquestions = "";
+                    vm.questions = "";
+                    vm.result = "";
+                    vm.show = false;
+                })
+        }
+
 
     }
 

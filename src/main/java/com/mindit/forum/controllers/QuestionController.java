@@ -1,6 +1,7 @@
 package com.mindit.forum.controllers;
 
 
+import com.mindit.forum.dto.AnswerDTO;
 import com.mindit.forum.dto.QuestionDTO;
 import com.mindit.forum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -69,12 +70,29 @@ public class QuestionController {
     }
 
     @RequestMapping(value = "/updateQuest", method = RequestMethod.POST)
-    public ResponseEntity updateQuestion(@RequestBody QuestionDTO questionDTO){
+    public ResponseEntity updateQuestion(@RequestBody QuestionDTO questionDTO) {
 
         Boolean ok = questionService.updateQuestion(questionDTO);
-        if(ok == true)
+        if (ok == true)
             return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
         else return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+    }
+
+    @RequestMapping(value = "/myQuestions", method = RequestMethod.GET)
+    public ResponseEntity getMyQuestions(@RequestParam(value="username") String username){
+        List<QuestionDTO> myQuestions = questionService.getMyQuestions(username);
+        if(myQuestions.size() == 0)
+            return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity(myQuestions,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ResponseEntity search(@RequestParam(value="input") String input){
+        List<QuestionDTO> result = questionService.search(input);
+        if(result.size() == 0)
+            return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity(result,HttpStatus.OK);
+
     }
 
 }

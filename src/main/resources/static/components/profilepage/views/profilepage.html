@@ -1,9 +1,24 @@
 <div class="bg" >
 
+
     <div class="poz">
         <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary">Add question</button>
         <button type="button" class="btn btn-primary" ng-click="ppCtrl.showAll()">Show all</button>
         <button type="button" class="btn btn-primary" ng-click="ppCtrl.myQuest()">My questions</button>
+        <button type="button" class="btn btn-primary" ng-click="ppCtrl.myAnsQuest()">My answers</button>
+    </div>
+
+
+    <div class="search" ng-if="ppCtrl.show">
+        <input type="text" placeholder="Search..." ng-model="ppCtrl.input" ng-change = "ppCtrl.search()" >
+    </div>
+
+    <div data-toggle="modal" data-target="#myModal1" ng-repeat="x in ppCtrl.result">
+
+        <div>
+            {{ x.questText}}
+        </div>
+
     </div>
 
 
@@ -13,18 +28,20 @@
                 {{ quest.questText}}
             </div>
 
-        </div>
 
-        <div data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.myquestions" class="rep" ng-click="ppCtrl.modal(quest)">
-            <div >
-                <p class="disp">{{ quest.questText}}</p>
-
-            </div>
-
+    <div  data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.myquestions" class="rep" ng-click="ppCtrl.modal(quest)">
+        <div >
+            {{ quest.questText}}
         </div>
     </div>
 
-
+    <div class="pos" ng-repeat="myQuest in ppCtrl.myAnsQuests" >
+         <div class="myquestion">{{myQuest.questText}}</div>
+         <div data-toggle="modal" data-target="#myModal1"  class="myanswer" ng-repeat="x in myQuest.answers" ng-click="ppCtrl.modal(quest)">
+                {{ x.ansText }}
+         </div>
+    </div>
+            
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
 

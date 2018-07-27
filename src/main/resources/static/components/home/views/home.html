@@ -2,11 +2,11 @@
 
 <div class="bg">
 
+
     <div class="poz">
         <button ng-if="!dsp" type="button" class="btn btn-success poz"  ng-click="homeCtrl.toLogin1()">Sign in</button>
         <button ng-if = "dsp" type="button" class="btn btn-success poz"  ng-click="homeCtrl.toPP()">Your profile</button>
         <button type="button" class="btn btn-primary poz"  ng-click="homeCtrl.showAll()">Show all</button>
-    </div>
 
 
     <div class="questBox">
@@ -29,8 +29,10 @@
 
                 </div>
                 <div class="modal-footer">
+
                     <button type="button" class="btn btn-success" ng-click="homeCtrl.toLogin(question)">Add answer</button>
                     <textarea class="form-control" rows="1" id="comment1" ng-model="homeCtrl.ans"></textarea>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -41,6 +43,7 @@
 
 
     <div class="container">
+<<<<<<< HEAD
         <button data-toggle="modal" data-target="#myModal1" type="button" class="btn btn-primary" id="questButton" ng-click="homeCtrl.toLogin2()">Add question</button>
     </div>
 
@@ -68,6 +71,8 @@
             </div>
 
         </div>
+
     </div>
 
+</div>
 </div>

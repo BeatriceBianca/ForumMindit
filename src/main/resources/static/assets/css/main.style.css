@@ -142,7 +142,55 @@ html, body {
 
 }
 
-.dist{
+.dist {
     margin-left: 15px;
+}
+
+.myquestion{
+
+    border:5px solid snow;
+    border-radius: 30px;
+    background-color: aliceblue;
+    padding:1%;
+    margin-bottom: 1%;
+    margin-right: 18%;
+    margin-left: 19%;
+    text-align: center;
+
+}
+
+.myanswer{
+    cursor: pointer;
+    border: 5px solid snow;
+    border-radius: 30px;
+    background-color: aliceblue;
+    padding: 0.5%;
+    margin-bottom: 2%;
+    margin-right: 33%;
+    margin-left: 32%;
+    text-align: center;}
+
+.pos{
+    position: relative;
+    top: 25%;
+}
+
+
+.search {
+    position: absolute;
+    top: 4.8%;
+    margin-left: -15%;
+}
+
+.search input[type=text] {
+
+    padding: 16px;
+    margin-top: 7px;
+    margin-left: 280px;
+    font-size: 17px;
+    width: 350px;
+    border: 5px solid royalblue;
+    border-radius: 40px;
+
 }
 
