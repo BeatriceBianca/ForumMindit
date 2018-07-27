@@ -7,12 +7,14 @@
         <button ng-if="!dsp" type="button" class="btn btn-success poz"  ng-click="homeCtrl.toLogin1()">Sign in</button>
         <button ng-if = "dsp" type="button" class="btn btn-success poz"  ng-click="homeCtrl.toPP()">Your profile</button>
         <button type="button" class="btn btn-primary poz"  ng-click="homeCtrl.showAll()">Show all</button>
+    </div>
 
 
-    <div class="questBox">
-        <div class="link"  data-toggle="modal" data-target="#myModal" ng-repeat = "question in homeCtrl.Questions"  ng-click="homeCtrl.modal(question)">
+    <div class="centru">
+        <div class="rep"  data-toggle="modal" data-target="#myModal" ng-repeat = "question in homeCtrl.Questions"  ng-click="homeCtrl.modal(question)">
              <p> {{ question.questText}} </p>
         </div>
+        <button data-toggle="modal" data-target="#myModal1" type="button" class="btn btn-primary" id="questButton" ng-click="homeCtrl.toLogin2()">Add question</button>
     </div>
 
 
@@ -40,12 +42,6 @@
         </div>
     </div>
 
-
-
-    <div class="container">
-<<<<<<< HEAD
-        <button data-toggle="modal" data-target="#myModal1" type="button" class="btn btn-primary" id="questButton" ng-click="homeCtrl.toLogin2()">Add question</button>
-    </div>
 
     <div id="myModal1" class="modal" role="dialog">
         <div class="modal-dialog modal-lg">
