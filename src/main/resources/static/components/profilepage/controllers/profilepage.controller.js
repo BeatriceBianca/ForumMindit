@@ -29,8 +29,10 @@
 
         vm.search = function(){
 
+            vm.result = "";
             ProfilePageService.search(vm.input)
                 .then(function (response) {
+
                     vm.result = response.data;
                     vm.questions = "";
                     vm.myquestions = "";
