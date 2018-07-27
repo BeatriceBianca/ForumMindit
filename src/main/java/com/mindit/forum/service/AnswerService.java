@@ -8,5 +8,7 @@ public interface AnswerService {
 
     Boolean addAns(AnswerDTO answerDTO);
     List<AnswerDTO> getAllAnswers(int id);
+    Boolean deleteAnswer(AnswerDTO answerDTO);
+    Boolean updateAnswer(AnswerDTO answerDTO);
 
 }

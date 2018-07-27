@@ -25,4 +25,14 @@ public class AnswerServiceImpl implements AnswerService {
         return answerDAO.getAllAnswers(id);
     }
 
+    public Boolean deleteAnswer(AnswerDTO answerDTO){
+         answerDAO.deleteAnswer(answerDTO);
+         return true;
+    }
+
+    public Boolean updateAnswer(AnswerDTO answerDTO){
+        answerDAO.updateAnswer(answerDTO);
+        return true;
+    }
+
 }

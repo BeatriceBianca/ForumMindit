@@ -23,9 +23,18 @@
                 return $http.post("/delete",question);
             }
 
+            function deleteAnswer(answer){
+                return $http.post("/delete/ans",answer);
+            }
+
             function updateQuestion(question) {
                 return $http.post("/updateQuest", question);
             }
+
+            function updateAnswer(answer) {
+                return $http.post("/update/ans", answer);
+            }
+
 
 
             function myAnsQuest(username){
@@ -41,7 +50,9 @@
                 answer: answer,
                 myquest: myquest,
                 deleteQuestion: deleteQuestion,
+                deleteAnswer:   deleteAnswer,
                 updateQuestion: updateQuestion,
+                updateAnswer: updateAnswer,
                 myAnsQuest: myAnsQuest,
                 search: search
             };

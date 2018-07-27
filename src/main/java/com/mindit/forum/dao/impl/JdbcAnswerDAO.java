@@ -65,4 +65,36 @@ public class JdbcAnswerDAO implements AnswerDAO {
     }
 
 
+
+    @Override
+    public void deleteAnswer(AnswerDTO answerDTO){
+
+        String sqlDelete = "" +
+                "DELETE " +
+                "FROM answer "+
+                "WHERE ans_id = :ansId";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("ansId", answerDTO.getAnsId());
+
+        jdbcTemplate.update(sqlDelete, namedParameters);
+
+    }
+
+
+    @Override
+    public void updateAnswer(AnswerDTO answerDTO){
+
+        String sqlUpdate = "" +
+                "UPDATE answer " +
+                "SET ans_text = :ansText "+
+                "WHERE ans_id = :ansId";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("ansId", answerDTO.getAnsId());
+        namedParameters.addValue("ansText", answerDTO.getAnsText());
+
+        jdbcTemplate.update(sqlUpdate,namedParameters);
+    }
+
 }
