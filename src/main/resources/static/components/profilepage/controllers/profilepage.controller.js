@@ -29,7 +29,7 @@
         init();
 
         vm.search = function(){
-
+            vm.result = "";
             ProfilePageService.search(vm.input)
                 .then(function (response) {
                     vm.result = response.data;
@@ -97,12 +97,27 @@
                 });
         }
 
+        vm.deleteAnswer = function(){
+            var answer = vm.selectedAnswer;
+            ProfilePageService.deleteAnswer(answer)
+                .then(function (response) {
+                    alert("Delete");
+                }, function (reason) {
+                    alert("Error");
+                });
+        }
+
+
         vm.modal = function(quest){
             vm.selectedQuest = quest;
             ProfilePageService.answer(vm.selectedQuest.questId)
                 .then(function (response) {
                     vm.answers = response.data;
                 })
+        }
+
+        vm.modal2 = function(answer){
+            vm.selectedAnswer = answer;
         }
 
 
@@ -121,7 +136,9 @@
                      vm.myquestions = response.data;
                      vm.questions = "";
                      vm.shw = true;
-
+                     vm.myAnsQuests = "";
+                     vm.result = "";
+                     vm.show = false;
                  })
         }
 
@@ -134,6 +151,15 @@
         vm.update = function () {
 
             ProfilePageService.updateQuestion(vm.selectedQuest)
+                .then(function (response) {
+                    vm.editMode = false;
+                });
+
+        }
+
+        vm.updateAnswer = function () {
+
+            ProfilePageService.updateAnswer(vm.selectedAnswer)
                 .then(function (response) {
                     vm.editMode = false;
                 });

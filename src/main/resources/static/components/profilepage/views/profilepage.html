@@ -13,34 +13,40 @@
         <input type="text" placeholder="Search..." ng-model="ppCtrl.input" ng-change = "ppCtrl.search()" >
     </div>
 
-    <div data-toggle="modal" data-target="#myModal1" ng-repeat="x in ppCtrl.result">
-
-        <div>
-            {{ x.questText}}
-        </div>
-
-    </div>
-
 
     <div class="centru">
         <div data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.questions" class="rep" ng-click="ppCtrl.modal(quest)">
             <div >
                 {{ quest.questText}}
             </div>
+        </div>
 
+        <div  data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.myquestions" class="rep" ng-click="ppCtrl.modal(quest)">
+            <div >
+                {{ quest.questText}}
+            </div>
+        </div>
 
-    <div  data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.myquestions" class="rep" ng-click="ppCtrl.modal(quest)">
-        <div >
-            {{ quest.questText}}
+        <div data-toggle="modal" data-target="#myModal1" ng-repeat="x in ppCtrl.result" class="rep">
+
+            <div>
+                {{ x.questText}}
+            </div>
+
         </div>
     </div>
 
+
     <div class="pos" ng-repeat="myQuest in ppCtrl.myAnsQuests" >
          <div class="myquestion">{{myQuest.questText}}</div>
-         <div data-toggle="modal" data-target="#myModal1"  class="myanswer" ng-repeat="x in myQuest.answers" ng-click="ppCtrl.modal(quest)">
+         <div data-toggle="modal" data-target="#myModal2"  class="myanswer" ng-repeat="x in myQuest.answers" ng-click="ppCtrl.modal2(x)">
                 {{ x.ansText }}
          </div>
     </div>
+
+
+
+
             
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -93,6 +99,42 @@
 
                 </div>
                 <div class="modal-footer">
+                    <textarea class="form-control" rows="1"  ng-model="ppCtrl.ans"></textarea>
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+                    <button type="button" class="btn btn-success" ng-click="ppCtrl.addAns()">Add answer</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+
+
+    <div id="myModal2" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+
+                    <h4 ng-if="!ppCtrl.editMode" class="modal-title">{{ ppCtrl.selectedAnswer.ansText }}</h4>
+                    <textarea  class="form-control" rows="1" ng-if="ppCtrl.editMode" ng-model=" ppCtrl.selectedAnswer.ansText"></textarea>
+
+                    <button  type="button" class="btn btn-danger dist" ng-click = "ppCtrl.deleteAnswer()" >Delete</button>
+
+                    <button type="button" class="btn btn-success dist" ng-if ="!ppCtrl.editMode" ng-click="ppCtrl.enableEditMode()" >Edit answer</button>
+                    <button type="button" class="btn btn-success dist" ng-if ="ppCtrl.editMode" ng-click="ppCtrl.updateAnswer()">Save edit</button>
+
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+
+                </div>
+                <div class="modal-body" >
+                    <div ng-repeat="an in ppCtrl.answers">
+                        <p >{{ an.userName }}: {{ an.ansText}} </p>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
                     <textarea class="form-control" rows="1" id="comment1" ng-model="ppCtrl.ans"></textarea>
                     <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
                     <button type="button" class="btn btn-success" ng-click="ppCtrl.addAns()">Add answer</button>
@@ -101,5 +143,9 @@
 
         </div>
     </div>
+
+
+
+
 
 </div>
