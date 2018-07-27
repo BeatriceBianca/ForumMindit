@@ -1,6 +1,7 @@
 package com.mindit.forum.service.impl;
 
 import com.mindit.forum.dao.QuestionDAO;
+import com.mindit.forum.dto.AnswerDTO;
 import com.mindit.forum.dto.QuestionDTO;
 import com.mindit.forum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,4 +40,13 @@ public class QuestionServiceImpl implements QuestionService {
 
         return questionDAO.getAnswers(id);
     }
+
+    public List<QuestionDTO> getMyQuestions(String username){
+        return questionDAO.getMyQuestions(username);
+    }
+
+    public List<QuestionDTO> search(String input){
+        return questionDAO.search(input);
+    }
+
 }

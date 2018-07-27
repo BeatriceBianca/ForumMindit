@@ -41,6 +41,19 @@
 
         }
 
+        vm.toLogin = function(){
+            $('#myModal').modal('toggle');
+            $state.go("authentication",true);
+        }
+
+        vm.toLogin1 = function(){
+            $state.go("authentication",true);
+        }
+
+        vm.toPP = function(){
+            $state.go("profilepage",true);
+        }
+
     }
 
 })();

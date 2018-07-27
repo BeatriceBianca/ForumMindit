@@ -13,4 +13,6 @@ public interface QuestionDAO {
     void addQuest(QuestionDTO quest);
     List<QuestionDTO> getAllQuestions();
     List<QuestionDTO> getUserQuestions(String userName);
+    List<QuestionDTO> getMyQuestions(String username);
+    List<QuestionDTO> search(String input);
 }

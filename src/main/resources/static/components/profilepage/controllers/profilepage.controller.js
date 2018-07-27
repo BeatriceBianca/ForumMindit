@@ -19,10 +19,41 @@
                         ProfilePageService) {
 
         var vm = this;
+
         function init(){
             alert($rootScope.usr);
+
         }
         init();
+
+
+        vm.search = function(){
+
+            ProfilePageService.search(vm.input)
+                .then(function (response) {
+                    vm.result = response.data;
+                    vm.questions = "";
+                    vm.myquestions = "";
+                    vm.myAnsQuests = "";
+
+                })
+
+
+            /*var result = new Array;
+            var j = 0;
+
+            for (var i=0; i < questions.length; i++) {
+                if( questions.questText.toLowerCase().contains(vm.input.toLowerCase()) ){
+                    vm.result[j++] =  quest.questText;
+                }
+            }
+
+            if( vm.result.size() > 0 ){
+                vm.showResult = true;
+            }
+            else vm.showResult = false;*/
+
+        }
 
         vm.addQuest = function(){
 
@@ -63,6 +94,9 @@
                 .then(function (response) {
                     vm.questions = response.data;
                     vm.myquestions = "";
+                    vm.myAnsQuests = "";
+                    vm.result = "";
+                    vm.show = true;
                 })
         }
 
@@ -83,9 +117,24 @@
                  .then(function (response) {
                      vm.myquestions = response.data;
                      vm.questions = "";
-
+                     vm.myAnsQuests = "";
+                     vm.result ="";
+                     vm.show = false;
                  })
         }
+
+
+        vm.myAnsQuest = function(){
+            ProfilePageService.myAnsQuest($rootScope.usr)
+                .then(function(response){
+                    vm.myAnsQuests = response.data;
+                    vm.myquestions = "";
+                    vm.questions = "";
+                    vm.result = "";
+                    vm.show = false;
+                })
+        }
+
 
     }
 

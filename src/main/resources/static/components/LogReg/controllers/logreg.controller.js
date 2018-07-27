@@ -47,7 +47,7 @@
                     alert("Login succeded");
                     $rootScope.usr = vm.luserName;
                     $('#myModal').modal('toggle');
-                    $state.go("profilepage",true);
+                    $state.go("home",true);
 
                 }, function () {
                     alert("Gresit!")
