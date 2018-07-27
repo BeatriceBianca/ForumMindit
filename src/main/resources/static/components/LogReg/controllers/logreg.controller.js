@@ -17,7 +17,7 @@
                         $rootScope,
                         $state, LogRegService) {
 
-        var vm = this;
+         var vm = this;
 
         vm.register = function(){
             var user = {
@@ -46,6 +46,7 @@
                 .then(function(response){
                     alert("Login succeded");
                     $rootScope.usr = vm.luserName;
+                    $rootScope.dsp = true;
                     $('#myModal').modal('toggle');
                     $state.go("home",true);
 

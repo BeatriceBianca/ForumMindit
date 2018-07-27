@@ -2,6 +2,7 @@ package com.mindit.forum.controllers;
 
 
 import com.mindit.forum.dto.AnswerDTO;
+import com.mindit.forum.dto.QuestionDTO;
 import com.mindit.forum.service.AnswerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -36,6 +37,25 @@ public class AnswerController {
         if(a.size() == 0)
             return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
         else return new ResponseEntity(a,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/delete/ans", method = RequestMethod.POST)
+    public ResponseEntity deleteAnswer(@RequestBody AnswerDTO answerDTO){
+
+        Boolean ok = answerService.deleteAnswer(answerDTO);
+        if(ok == true)
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        else return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+
+    }
+
+    @RequestMapping(value = "/update/ans", method = RequestMethod.POST)
+    public ResponseEntity updateAnswer(@RequestBody AnswerDTO answerDTO) {
+
+        Boolean ok = answerService.updateAnswer(answerDTO);
+        if (ok == true)
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        else return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
     }
 
 

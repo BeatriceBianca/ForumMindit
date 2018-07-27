@@ -9,34 +9,34 @@ primary key(user_id)
 
 insert into user(first_name,last_name,username,password)
 values(
-'Alexander',
-'Mclean',
-'Alex',
-'1234'
-),
+  'Alexander',
+  'Mclean',
+  'Alex',
+  '1234'
+  ),
 
 
-('Robert',
-'Harvey',
-'Robert Harvey',
-'2345'
-),
+  ('Robert',
+  'Harvey',
+  'Robert Harvey',
+  '2345'
+  ),
 
 
-('Eric',
-'Long',
-'CptEric',
-'3456'
-),
+  ('Eric',
+  'Long',
+  'CptEric',
+  '3456'
+  ),
 
-('Albert',
-'Green',
-'Albert88',
-'4567'
-),
+  ('Albert',
+  'Green',
+  'Albert88',
+  '4567'
+  ),
 
-('Anonymous',
-'User',
-'User1058',
-'5678'
-);
+  ('Anonymous',
+  'User',
+  'User1058',
+  '5678'
+  );

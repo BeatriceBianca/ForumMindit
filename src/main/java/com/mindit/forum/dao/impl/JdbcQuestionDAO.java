@@ -28,7 +28,8 @@ public class JdbcQuestionDAO implements QuestionDAO {
                 "SELECT " +
                 "    quest_id, " +
                 "    quest_text " +
-                "FROM question ";
+                "FROM question "+
+                "LIMIT 3";
 
 
         try {
@@ -157,6 +158,36 @@ public class JdbcQuestionDAO implements QuestionDAO {
 
     }
 
+    @Override
+    public void deleteQuestion(QuestionDTO questionDTO){
+
+        String sqlDelete = "" +
+                "DELETE " +
+                "FROM question "+
+                "WHERE quest_id = :questId";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("questId", questionDTO.getQuestId());
+
+        namedJdbcTemplate.update(sqlDelete, namedParameters);
+
+    }
+
+    @Override
+    public void updateQuestion(QuestionDTO questionDTO){
+
+        String sqlUpdate = "" +
+                "UPDATE question " +
+                "SET quest_text = :questText "+
+                "WHERE quest_id = :questId";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+        namedParameters.addValue("questId", questionDTO.getQuestId());
+        namedParameters.addValue("questText", questionDTO.getQuestText());
+
+        namedJdbcTemplate.update(sqlUpdate,namedParameters);
+    }
+
 
     @Override
     public List<QuestionDTO> getMyQuestions(String userName){
@@ -245,10 +276,5 @@ public class JdbcQuestionDAO implements QuestionDAO {
         return null;
 
     }
-
-
-
-
-
 
 }

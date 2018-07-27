@@ -41,6 +41,16 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.getAnswers(id);
     }
 
+    public Boolean deleteQuestion(QuestionDTO questionDTO){
+
+        questionDAO.deleteQuestion(questionDTO);
+        return true;
+    }
+
+    public Boolean updateQuestion(QuestionDTO questionDTO){
+        questionDAO.updateQuestion(questionDTO);
+        return true;
+    }
     public List<QuestionDTO> getMyQuestions(String username){
         return questionDAO.getMyQuestions(username);
     }
