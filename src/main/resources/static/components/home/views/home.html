@@ -2,13 +2,14 @@
 
 <div class="bg">
 
-    <div class="container">
-        <button type="button" class="btn btn-success" id="loginButton" ng-click="homeCtrl.toLogin1()">Sign in</button>
-        <button type="button" class="btn btn-success" ng-click="homeCtrl.toPP()">My profile</button>
-    </div>
+
+    <div class="poz">
+        <button ng-if="!dsp" type="button" class="btn btn-success poz"  ng-click="homeCtrl.toLogin1()">Sign in</button>
+        <button ng-if = "dsp" type="button" class="btn btn-success poz"  ng-click="homeCtrl.toPP()">Your profile</button>
+        <button type="button" class="btn btn-primary poz"  ng-click="homeCtrl.showAll()">Show all</button>
 
 
-    <div id="questBox">
+    <div class="questBox">
         <div class="link"  data-toggle="modal" data-target="#myModal" ng-repeat = "question in homeCtrl.Questions"  ng-click="homeCtrl.modal(question)">
              <p> {{ question.questText}} </p>
         </div>
@@ -28,7 +29,10 @@
 
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-success" id="ansButton" ng-click="homeCtrl.toLogin()">Add answer</button>
+
+                    <button type="button" class="btn btn-success" ng-click="homeCtrl.toLogin(question)">Add answer</button>
+                    <textarea class="form-control" rows="1" id="comment1" ng-model="homeCtrl.ans"></textarea>
+
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -39,7 +43,36 @@
 
 
     <div class="container">
-        <button type="button" class="btn btn-primary" id="questButton" ng-click="homeCtrl.toLogin1()">Add question</button>
+<<<<<<< HEAD
+        <button data-toggle="modal" data-target="#myModal1" type="button" class="btn btn-primary" id="questButton" ng-click="homeCtrl.toLogin2()">Add question</button>
     </div>
 
+    <div id="myModal1" class="modal" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+
+                <div class="modal-header">
+                    <h4 class="modal-title">Add a question</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+
+                    <p>Your question</p>
+                    <textarea class="form-control" rows="5" id="comment" ng-model="homeCtrl.quest"></textarea>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-success" ng-click = "homeCtrl.addQuest()" >Add</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
 </div>

@@ -18,25 +18,6 @@ public class QuestionController {
     @Autowired
     private QuestionService questionService;
 
-
-    @RequestMapping(value="/answers",method = RequestMethod.GET)
-    public ResponseEntity getAnswers(@RequestParam(value="id") int id){
-
-        List<String> answersList = questionService.getAnswers(id);
-
-        return new ResponseEntity(answersList,HttpStatus.OK);
-    }
-
-
-    @RequestMapping(value="/questions", method = RequestMethod.GET)
-    public ResponseEntity bringQuestions(){
-
-        List<QuestionDTO> questionsList = questionService.bringQuestions();
-
-        return new ResponseEntity(questionsList,HttpStatus.OK);
-    }
-
-
     @RequestMapping(value = "/question", method = RequestMethod.PUT)
     public ResponseEntity addQuest(@RequestBody QuestionDTO questionDTO){
         Boolean ok = questionService.addQuest(questionDTO);
@@ -61,6 +42,41 @@ public class QuestionController {
         else return new ResponseEntity(q,HttpStatus.OK);
     }
 
+    @RequestMapping(value="/questions", method = RequestMethod.GET)
+    public ResponseEntity bringQuestions(){
+
+        List<QuestionDTO> questionsList = questionService.bringQuestions();
+
+        return new ResponseEntity(questionsList,HttpStatus.OK);
+    }
+
+    @RequestMapping(value="/answers",method = RequestMethod.GET)
+    public ResponseEntity getAnswers(@RequestParam(value="id") int id){
+
+        List<String> answersList = questionService.getAnswers(id);
+
+        return new ResponseEntity(answersList,HttpStatus.OK);
+
+    }
+
+    @RequestMapping(value = "/delete", method = RequestMethod.POST)
+    public ResponseEntity deleteQuestion(@RequestBody QuestionDTO questionDTO){
+
+        Boolean ok = questionService.deleteQuestion(questionDTO);
+        if(ok == true)
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        else return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+
+    }
+
+    @RequestMapping(value = "/updateQuest", method = RequestMethod.POST)
+    public ResponseEntity updateQuestion(@RequestBody QuestionDTO questionDTO) {
+
+        Boolean ok = questionService.updateQuestion(questionDTO);
+        if (ok == true)
+            return new ResponseEntity<Void>(HttpStatus.NO_CONTENT);
+        else return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+    }
 
     @RequestMapping(value = "/myQuestions", method = RequestMethod.GET)
     public ResponseEntity getMyQuestions(@RequestParam(value="username") String username){
@@ -76,6 +92,7 @@ public class QuestionController {
         if(result.size() == 0)
             return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
         else return new ResponseEntity(result,HttpStatus.OK);
+
     }
 
 }

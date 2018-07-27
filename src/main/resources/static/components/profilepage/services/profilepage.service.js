@@ -5,17 +5,10 @@
     angular
         .module('minditForum')
         .factory('ProfilePageService', ['$http', '$location', function($http, $location) {
-            function addQuest(question){
-                return $http.put("/question",question);
-            }
 
             function find(){
                 return $http.get("/allquest",null);
 
-            }
-
-            function addAns(answer){
-                return $http.put("/answer",answer);
             }
 
             function answer(id){
@@ -24,6 +17,14 @@
 
             function myquest(userName){
                 return $http.get("/userquest?userName=" + userName, null);
+            }
+
+            function deleteQuestion(question){
+                return $http.post("/delete",question);
+            }
+
+            function updateQuestion(question) {
+                return $http.post("/updateQuest", question);
             }
 
 
@@ -36,11 +37,11 @@
             }
 
             return {
-                addQuest: addQuest,
                 find: find,
-                addAns: addAns,
                 answer: answer,
                 myquest: myquest,
+                deleteQuestion: deleteQuestion,
+                updateQuestion: updateQuestion,
                 myAnsQuest: myAnsQuest,
                 search: search
             };
