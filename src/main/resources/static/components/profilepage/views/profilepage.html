@@ -3,6 +3,19 @@
     <button data-toggle="modal" data-target="#myModal" type="button" class="btn btn-primary poz">Add question</button>
     <button type="button" class="btn btn-primary poz" ng-click="ppCtrl.showAll()">Show all</button>
     <button type="button" class="btn btn-primary poz" ng-click="ppCtrl.myQuest()">My questions</button>
+    <button type="button" class="btn btn-primary poz" ng-click="ppCtrl.myAnsQuest()">My answers</button>
+
+
+    <div class="search" ng-if="ppCtrl.show">
+        <input type="text" placeholder="Search..." ng-model="ppCtrl.input" ng-change = "ppCtrl.search()" >
+    </div>
+
+    <div data-toggle="modal" data-target="#myModal1" ng-repeat="x in ppCtrl.result">
+        <div>
+            {{ x.questText}}
+        </div>
+
+    </div>
 
     <div data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.questions" class="rep" ng-click="ppCtrl.modal(quest)">
         <div >
@@ -11,12 +24,22 @@
 
     </div>
 
-    <div data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.myquestions" class="rep" ng-click="ppCtrl.modal(quest)">
+    <div  data-toggle="modal" data-target="#myModal1" ng-repeat="quest in ppCtrl.myquestions" class="rep" ng-click="ppCtrl.modal(quest)">
         <div >
             {{ quest.questText}}
         </div>
 
     </div>
+
+
+    <div class="pos" ng-repeat="myQuest in ppCtrl.myAnsQuests" >
+         <div class="myquestion">{{myQuest.questText}}</div>
+         <div data-toggle="modal" data-target="#myModal1"  class="myanswer" ng-repeat="x in myQuest.answers" ng-click="ppCtrl.modal(quest)">
+                {{ x.ansText }}
+         </div>
+    </div>
+
+
 
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
@@ -58,9 +81,6 @@
                         <p>{{ an.userName }}: {{ an.ansText}} </p>
                     </div>
 
-                    <div ng-repeat="an in ppCtrl.answers">
-                        <p>{{ an.userName }}: {{ an.ansText}} </p>
-                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>

@@ -1,6 +1,7 @@
 package com.mindit.forum.controllers;
 
 
+import com.mindit.forum.dto.AnswerDTO;
 import com.mindit.forum.dto.QuestionDTO;
 import com.mindit.forum.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +17,25 @@ public class QuestionController {
 
     @Autowired
     private QuestionService questionService;
+
+
+    @RequestMapping(value="/answers",method = RequestMethod.GET)
+    public ResponseEntity getAnswers(@RequestParam(value="id") int id){
+
+        List<String> answersList = questionService.getAnswers(id);
+
+        return new ResponseEntity(answersList,HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value="/questions", method = RequestMethod.GET)
+    public ResponseEntity bringQuestions(){
+
+        List<QuestionDTO> questionsList = questionService.bringQuestions();
+
+        return new ResponseEntity(questionsList,HttpStatus.OK);
+    }
+
 
     @RequestMapping(value = "/question", method = RequestMethod.PUT)
     public ResponseEntity addQuest(@RequestBody QuestionDTO questionDTO){
@@ -39,6 +59,23 @@ public class QuestionController {
         if(q.size() == 0)
             return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
         else return new ResponseEntity(q,HttpStatus.OK);
+    }
+
+
+    @RequestMapping(value = "/myQuestions", method = RequestMethod.GET)
+    public ResponseEntity getMyQuestions(@RequestParam(value="username") String username){
+        List<QuestionDTO> myQuestions = questionService.getMyQuestions(username);
+        if(myQuestions.size() == 0)
+            return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity(myQuestions,HttpStatus.OK);
+    }
+
+    @RequestMapping(value = "/search", method = RequestMethod.GET)
+    public ResponseEntity search(@RequestParam(value="input") String input){
+        List<QuestionDTO> result = questionService.search(input);
+        if(result.size() == 0)
+            return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity(result,HttpStatus.OK);
     }
 
 }

@@ -26,12 +26,23 @@
                 return $http.get("/userquest?userName=" + userName, null);
             }
 
+
+            function myAnsQuest(username){
+                return $http.get("/myQuestions?username=" + username , null);
+            }
+
+            function search(input){
+                return $http.get("/search?input=" + input , null);
+            }
+
             return {
                 addQuest: addQuest,
                 find: find,
                 addAns: addAns,
                 answer: answer,
-                myquest: myquest
+                myquest: myquest,
+                myAnsQuest: myAnsQuest,
+                search: search
             };
 
         }]);

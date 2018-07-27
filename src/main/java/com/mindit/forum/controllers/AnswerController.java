@@ -21,6 +21,7 @@ public class AnswerController {
     @Autowired
     private AnswerService answerService;
 
+
     @RequestMapping(value = "/answer", method = RequestMethod.PUT)
     public ResponseEntity addAns(@RequestBody AnswerDTO answerDTO){
         Boolean ok = answerService.addAns(answerDTO);
@@ -36,4 +37,6 @@ public class AnswerController {
             return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
         else return new ResponseEntity(a,HttpStatus.OK);
     }
+
+
 }
