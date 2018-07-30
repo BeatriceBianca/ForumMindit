@@ -161,14 +161,12 @@ html, body {
 
 .myanswer{
     cursor: pointer;
-    border: 5px solid snow;
-    border-radius: 30px;
-    background-color: aliceblue;
     padding: 0.5%;
     margin-bottom: 2%;
     margin-right: 33%;
     margin-left: 32%;
-    text-align: center;}
+    text-align: left;
+}
 
 .pos{
     position: relative;
@@ -192,5 +190,23 @@ html, body {
     border: 5px solid royalblue;
     border-radius: 40px;
 
+}
+
+.fail{
+    color: red;
+    font-weight: bold;
+}
+
+.quest{
+    font-weight: bold;
+}
+
+.answer{
+    font-weight: bold;
+}
+
+.answer:hover{
+    font-weight: bold;
+    color: #95A5A6;
 }
 

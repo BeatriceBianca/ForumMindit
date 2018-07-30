@@ -21,10 +21,11 @@ public class JdbcAnswerDAO implements AnswerDAO {
     @Override
     public void addAns(AnswerDTO answerDTO) {
         String sqlInsert = "" +
-                "INSERT INTO answer(q_id, username, ans_text) VALUES( " +
+                "INSERT INTO answer(q_id, username, ans_text, ans_date) VALUES( " +
                 "    :qId, " +
                 "    :userName, " +
-                "    :ansText " +
+                "    :ansText ," +
+                "    SYSDATE()"+
                 ")";
 
         MapSqlParameterSource namedParameters = new MapSqlParameterSource();
@@ -58,6 +59,7 @@ public class JdbcAnswerDAO implements AnswerDAO {
                 ans.setqId(rs.getInt("q_id"));
                 ans.setUserName(rs.getString("username"));
                 ans.setAnsText(rs.getString("ans_text"));
+                ans.setDate(rs.getString("ans_date"));
                 results.add(ans);
             }
             return results;

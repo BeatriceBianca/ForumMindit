@@ -13,9 +13,14 @@
                  return $http.get("/login?userName=" +user.userName+"&password=" + user.password,null);
             }
 
+            function verifyUser(user){
+                return $http.get("/verifyuser?userName=" + user.userName, null);
+            }
+
             return {
                 register:register,
-                login: login
+                login: login,
+                verifyUser: verifyUser
             };
 
         }]);
