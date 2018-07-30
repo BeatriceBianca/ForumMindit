@@ -23,7 +23,6 @@
         var vm = this;
 
         function init(){
-            alert($rootScope.usr);
             vm.editMode = false;
         }
         init();
@@ -50,7 +49,6 @@
 
             SharedService.addQuest(question)
                 .then(function (response) {
-                    alert("Question added");
                     vm.quest = "";
 
                 }, function (reason) {
@@ -68,7 +66,6 @@
 
             SharedService.addAns(answer)
                 .then(function(response){
-                    alert("Answer added");
                     vm.ans = "";
                 }, function (reason) {
                     alert("Error");
@@ -174,7 +171,19 @@
                     vm.questions = "";
                     vm.result = "";
                     vm.show = false;
+                }, function (reason) {
+                    vm.myquestions = "";
+                    vm.questions = "";
+                    vm.show = false;
                 })
+        }
+
+        vm.LogOut = function () {
+
+            $rootScope.dsp = false;
+            $rootScope.usr = "";
+            $state.go("home", true);
+
         }
 
 

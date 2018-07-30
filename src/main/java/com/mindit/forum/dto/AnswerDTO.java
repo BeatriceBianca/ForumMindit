@@ -6,6 +6,15 @@ public class AnswerDTO {
     private int qId;
     private String userName;
     private String ansText;
+    private String date;
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
+    }
 
     public int getAnsId() {
         return ansId;

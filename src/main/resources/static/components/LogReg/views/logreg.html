@@ -29,6 +29,8 @@
                         <input type="password" class="form-control" id="lpwd" ng-model="lrCtrl.lpassword">
                     </div>
 
+                    <p class="fail">{{ fail }}</p>
+
                 </div>
 
                 <div class="modal-footer">
@@ -78,8 +80,10 @@
 
                     <div class="form-group">
                         <label for="rpwd">Repeat Password:</label>
-                        <input type="password" class="form-control" id="rpwd">
+                        <input type="password" class="form-control" id="rpwd" ng-model="lrCtrl.rpassword">
                     </div>
+
+                    <p class = "fail">{{ info }}</p>
 
                 </div>
 

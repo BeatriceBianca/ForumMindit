@@ -36,7 +36,7 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.bringQuestions();
     }
 
-    public List<String> getAnswers(int id) {
+    public List<AnswerDTO> getAnswers(int id) {
 
         return questionDAO.getAnswers(id);
     }

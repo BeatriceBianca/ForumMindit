@@ -38,6 +38,16 @@ public class UserController {
             return new ResponseEntity(userDTO, HttpStatus.OK);
         }
     }
+
+    @RequestMapping(value = "/verifyuser", method = RequestMethod.GET)
+    public ResponseEntity verifyUser(@RequestParam String userName){
+        UserDTO userDTO = userService.getUserByUserName(userName);
+        if(userDTO == null) {
+            return new ResponseEntity(null, HttpStatus.BAD_REQUEST);
+        } else {
+            return new ResponseEntity(userDTO, HttpStatus.OK);
+        }
+    }
 }
 
 

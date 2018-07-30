@@ -41,6 +41,8 @@
             HomeService.getAnswers(question.questId)
                 .then(function(response){
                     vm.Answers = response.data;
+                }, function (reason) {
+                    vm.Answers = "";
                 })
 
         }
@@ -69,7 +71,6 @@
 
                 SharedService.addAns(answer)
                     .then(function(response){
-                        alert("Answer added");
                         vm.ans = "";
                     }, function (reason) {
                         alert("Error");
@@ -119,7 +120,6 @@
 
             SharedService.addQuest(question)
                 .then(function (response) {
-                    alert("Question added");
                     vm.quest = "";
 
                 }, function (reason) {
