@@ -24,8 +24,22 @@
 
         function init(){
             vm.editMode = false;
+            var un = localStorage.getItem("username");
+            var display = localStorage.getItem("display");
+
+            if(un !=null && display !=null&& $rootScope.usr==null){
+                $rootScope.dsp = display;
+                $rootScope.usr = un;
+            } else {
+
+            }
         }
         init();
+
+        window.onbeforeunload = function (ev) {
+            localStorage.setItem("username", $rootScope.usr);
+            localStorage.setItem("display", $rootScope.dsp);
+        }
 
         vm.search = function(){
             vm.result = "";
