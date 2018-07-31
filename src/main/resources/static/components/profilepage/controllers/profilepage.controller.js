@@ -27,7 +27,7 @@
             var un = localStorage.getItem("username");
             var display = localStorage.getItem("display");
 
-            if(un !=null && display !=null&& $rootScope.usr==null){
+            if(un !=null && display !=null && $rootScope.usr==null){
                 $rootScope.dsp = display;
                 $rootScope.usr = un;
             } else {
@@ -194,7 +194,7 @@
 
         vm.LogOut = function () {
 
-            $rootScope.dsp = false;
+            $rootScope.dsp = null;
             $rootScope.usr = "";
             $state.go("home", true);
 
