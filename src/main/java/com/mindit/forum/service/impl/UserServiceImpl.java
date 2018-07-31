@@ -30,4 +30,15 @@ public class UserServiceImpl implements UserService {
         }
         return null;
     }
+
+    @Override
+    public UserDTO getUserByUserName(String userName){
+        Optional<UserDTO> userDTO = userDAO.getUserByUserName(userName);
+        UserDTO user = null;
+        if(userDTO.isPresent()){
+            user = userDTO.get();
+            return user;
+        }
+        return null;
+    }
 }

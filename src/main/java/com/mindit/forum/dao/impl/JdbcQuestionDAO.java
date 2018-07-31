@@ -24,13 +24,7 @@ public class JdbcQuestionDAO implements QuestionDAO {
     @Override
     public List<QuestionDTO> bringQuestions(){
 
-        String sqlSelect = "" +
-                "SELECT " +
-                "    quest_id, " +
-                "    quest_text " +
-                "FROM question "+
-                "LIMIT 3";
-
+        String sqlSelect = "SELECT quest_id, quest_text FROM question ORDER BY quest_id DESC LIMIT 3";
 
         try {
 
@@ -52,33 +46,32 @@ public class JdbcQuestionDAO implements QuestionDAO {
 
 
    @Override
-   public List<String> getAnswers(int id){
-
-       /*MapSqlParameterSource parameters = new MapSqlParameterSource();
-       parameters.addValue("id", id);*/
+   public List<AnswerDTO> getAnswers(int id){
 
        String sqlSelect = "" +
                "SELECT " +
-               "    ans_text " +
+               "    * " +
                "FROM answer " +
                "WHERE q_id = " + id;
 
+       MapSqlParameterSource namedParameters = new MapSqlParameterSource();
 
-
-       try {
-
-           List<Map<String, Object>> rows = jdbcTemplate.queryForList(sqlSelect);
-           List<String> listOfAnswers = new ArrayList<>();
-           for(Map row:rows) {
-               String answer = (String) (row.get("ans_text"));
-               listOfAnswers.add(answer);
+       return namedJdbcTemplate.execute(sqlSelect, namedParameters, preparedStatement ->{
+           ResultSet rs = preparedStatement.executeQuery();
+           List<AnswerDTO> results = new ArrayList<>();
+           while(rs.next()) {
+               AnswerDTO ans = new AnswerDTO();
+               ans.setAnsId(rs.getInt("ans_id"));
+               ans.setqId(rs.getInt("q_id"));
+               ans.setUserName(rs.getString("username"));
+               ans.setAnsText(rs.getString("ans_text"));
+               ans.setDate(rs.getString("ans_date"));
+               results.add(ans);
            }
-           return listOfAnswers;
+           return results;
 
-       } catch (EmptyResultDataAccessException ignored) {
-       }
+       });
 
-        return null;
    }
 
 

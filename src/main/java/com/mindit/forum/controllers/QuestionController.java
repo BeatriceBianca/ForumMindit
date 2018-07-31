@@ -53,8 +53,10 @@ public class QuestionController {
     @RequestMapping(value="/answers",method = RequestMethod.GET)
     public ResponseEntity getAnswers(@RequestParam(value="id") int id){
 
-        List<String> answersList = questionService.getAnswers(id);
-
+        List<AnswerDTO> answersList = questionService.getAnswers(id);
+        if(answersList.size() == 0)
+            return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
+            else
         return new ResponseEntity(answersList,HttpStatus.OK);
 
     }

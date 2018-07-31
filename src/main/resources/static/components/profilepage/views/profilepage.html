@@ -6,8 +6,8 @@
         <button type="button" class="btn btn-primary" ng-click="ppCtrl.showAll()">Show all</button>
         <button type="button" class="btn btn-primary" ng-click="ppCtrl.myQuest()">My questions</button>
         <button type="button" class="btn btn-primary" ng-click="ppCtrl.myAnsQuest()">My answers</button>
+        <button type="button" class="btn btn-primary" ng-click="ppCtrl.LogOut()">Logout</button>
     </div>
-
 
     <div class="search" ng-if="ppCtrl.show">
         <input type="text" placeholder="Search..." ng-model="ppCtrl.input" ng-change = "ppCtrl.search()" >
@@ -37,11 +37,13 @@
     </div>
 
 
-    <div class="pos" ng-repeat="myQuest in ppCtrl.myAnsQuests" >
-         <div class="myquestion">{{myQuest.questText}}</div>
-         <div data-toggle="modal" data-target="#myModal2"  class="myanswer" ng-repeat="x in myQuest.answers" ng-click="ppCtrl.modal2(x)">
-                {{ x.ansText }}
+    <div class="pos quest" ng-repeat="myQuest in ppCtrl.myAnsQuests" >
+         <div class="myquestion">{{myQuest.questText}}
+             <div data-toggle="modal" data-target="#myModal2" class="myanswer" ng-repeat="x in myQuest.answers" ng-click="ppCtrl.modal2(x)">
+             <p class="answer">&rarr; {{ x.ansText }}</p>
+             </div>
          </div>
+
     </div>
 
 
@@ -94,7 +96,7 @@
                 </div>
                 <div class="modal-body" >
                     <div ng-repeat="an in ppCtrl.answers">
-                        <p >{{ an.userName }}: {{ an.ansText}} </p>
+                        <p >{{ an.userName }}(on {{an.date}}): {{ an.ansText}} </p>
                     </div>
 
                 </div>

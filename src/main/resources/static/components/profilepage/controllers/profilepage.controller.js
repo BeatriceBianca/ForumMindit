@@ -23,10 +23,23 @@
         var vm = this;
 
         function init(){
-            alert($rootScope.usr);
             vm.editMode = false;
+            var un = localStorage.getItem("username");
+            var display = localStorage.getItem("display");
+
+            if(un !=null && display !=null && $rootScope.usr==null){
+                $rootScope.dsp = display;
+                $rootScope.usr = un;
+            } else {
+
+            }
         }
         init();
+
+        window.onbeforeunload = function (ev) {
+            localStorage.setItem("username", $rootScope.usr);
+            localStorage.setItem("display", $rootScope.dsp);
+        }
 
         vm.search = function(){
             vm.result = "";
@@ -51,7 +64,6 @@
 
             SharedService.addQuest(question)
                 .then(function (response) {
-                    alert("Question added");
                     vm.quest = "";
 
                 }, function (reason) {
@@ -69,7 +81,6 @@
 
             SharedService.addAns(answer)
                 .then(function(response){
-                    alert("Answer added");
                     vm.ans = "";
                 }, function (reason) {
                     alert("Error");
@@ -175,7 +186,19 @@
                     vm.questions = "";
                     vm.result = "";
                     vm.show = false;
+                }, function (reason) {
+                    vm.myquestions = "";
+                    vm.questions = "";
+                    vm.show = false;
                 })
+        }
+
+        vm.LogOut = function () {
+
+            $rootScope.dsp = null;
+            $rootScope.usr = "";
+            $state.go("home", true);
+
         }
 
 

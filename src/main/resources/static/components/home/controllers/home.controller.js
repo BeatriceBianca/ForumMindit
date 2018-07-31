@@ -26,12 +26,17 @@
         function init(){
 
 
+
             HomeService.bringQuestions()
                 .then(function(response){
                     vm.Questions = response.data;
 
 
             })
+
+            if($rootScope.usr == ""){
+                window.location.reload();
+            }
 
         }
         init();
@@ -41,6 +46,8 @@
             HomeService.getAnswers(question.questId)
                 .then(function(response){
                     vm.Answers = response.data;
+                }, function (reason) {
+                    vm.Answers = "";
                 })
 
         }
@@ -69,7 +76,6 @@
 
                 SharedService.addAns(answer)
                     .then(function(response){
-                        alert("Answer added");
                         vm.ans = "";
                     }, function (reason) {
                         alert("Error");
@@ -99,14 +105,20 @@
 
         vm.toLogin2 = function () {
 
+
             if($rootScope.dsp != true)
-                {
-                    $state.go("authentication", true);
-                    $('#myModal1').modal('toggle');
+                    {
+
+                        $('#myModal1').modal('toggle');
+                        $state.go("authentication", true);
+
+                    }
+
+                    else {
+
                 }
-            else
-            {
-            }
+
+
 
         }
 
@@ -119,7 +131,6 @@
 
             SharedService.addQuest(question)
                 .then(function (response) {
-                    alert("Question added");
                     vm.quest = "";
 
                 }, function (reason) {
