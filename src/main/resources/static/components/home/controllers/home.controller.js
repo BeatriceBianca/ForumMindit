@@ -26,12 +26,17 @@
         function init(){
 
 
+
             HomeService.bringQuestions()
                 .then(function(response){
                     vm.Questions = response.data;
 
 
             })
+
+            if($rootScope.usr == ""){
+                window.location.reload();
+            }
 
         }
         init();
@@ -100,14 +105,20 @@
 
         vm.toLogin2 = function () {
 
+
             if($rootScope.dsp != true)
-                {
-                    $state.go("authentication", true);
-                    $('#myModal1').modal('toggle');
+                    {
+
+                        $('#myModal1').modal('toggle');
+                        $state.go("authentication", true);
+
+                    }
+
+                    else {
+
                 }
-            else
-            {
-            }
+
+
 
         }
 
