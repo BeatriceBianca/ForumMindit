@@ -27,7 +27,6 @@
             if($rootScope.flag == null){
                 $rootScope.flag = sessionStorage.getItem("flag");
             }
-            alert($rootScope.flag);
 
             HomeService.bringQuestions()
                 .then(function(response){
