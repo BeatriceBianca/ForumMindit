@@ -59,4 +59,13 @@ public class AnswerController {
     }
 
 
+    @RequestMapping(value = "/searchAns", method = RequestMethod.GET)
+    public ResponseEntity searchAns(@RequestParam(value="input") String input){
+        List<AnswerDTO> result = answerService.searchAns(input);
+        if(result.size() == 0)
+            return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
+        else return new ResponseEntity(result,HttpStatus.OK);
+
+    }
+
 }

@@ -35,4 +35,8 @@ public class AnswerServiceImpl implements AnswerService {
         return true;
     }
 
+    public List<AnswerDTO> searchAns(String input){
+        return answerDAO.searchAns(input);
+    }
+
 }

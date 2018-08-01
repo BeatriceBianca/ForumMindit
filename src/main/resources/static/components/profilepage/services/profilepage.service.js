@@ -15,6 +15,10 @@
                 return $http.get("/getAnswer?questId=" + id, null);
             }
 
+            function question(id){
+                return $http.get("/getQuestion?id=" + id, null);
+            }
+
             function myquest(userName){
                 return $http.get("/userquest?userName=" + userName, null);
             }
@@ -41,20 +45,26 @@
                 return $http.get("/myQuestions?username=" + username , null);
             }
 
-            function search(input){
-                return $http.get("/search?input=" + input , null);
+            function searchQuest(input){
+                return $http.get("/searchQuest?input=" + input , null);
+            }
+
+            function searchAns(input){
+                return $http.get("/searchAns?input=" + input , null);
             }
 
             return {
                 find: find,
                 answer: answer,
+                question: question,
                 myquest: myquest,
                 deleteQuestion: deleteQuestion,
                 deleteAnswer:   deleteAnswer,
                 updateQuestion: updateQuestion,
                 updateAnswer: updateAnswer,
                 myAnsQuest: myAnsQuest,
-                search: search
+                searchQuest: searchQuest,
+                searchAns: searchAns
             };
 
         }]);

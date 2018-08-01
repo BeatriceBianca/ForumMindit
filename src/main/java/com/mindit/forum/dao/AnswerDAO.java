@@ -10,4 +10,5 @@ public interface AnswerDAO {
     List<AnswerDTO> getAllAnswers(int id);
     void deleteAnswer(AnswerDTO answerDTO);
     void updateAnswer(AnswerDTO answerDTO);
+    List<AnswerDTO> searchAns(String input);
 }

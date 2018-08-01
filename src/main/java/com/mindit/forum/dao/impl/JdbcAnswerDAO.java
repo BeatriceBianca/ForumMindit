@@ -99,4 +99,36 @@ public class JdbcAnswerDAO implements AnswerDAO {
         jdbcTemplate.update(sqlUpdate,namedParameters);
     }
 
+
+    @Override
+    public List<AnswerDTO> searchAns(String input){
+
+        String sqlSelect = "" +
+                "SELECT " +
+                "    * " +
+                "FROM answer " +
+                "WHERE ans_text " +
+                "LIKE '%" + input + "%'";
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+
+        return jdbcTemplate.execute(sqlSelect, namedParameters, preparedStatement -> {
+
+            ResultSet rs = preparedStatement.executeQuery();
+            List<AnswerDTO> result = new ArrayList<>();
+            while(rs.next()) {
+                AnswerDTO ans = new AnswerDTO();
+
+                ans.setAnsId(rs.getInt("ans_id"));
+                ans.setqId(rs.getInt("q_id"));
+                ans.setUserName(rs.getString("username"));
+                ans.setAnsText(rs.getString("ans_text"));
+                ans.setDate(rs.getString("ans_date"));
+                result.add(ans);
+            }
+            return result;
+        });
+
+    }
+
 }

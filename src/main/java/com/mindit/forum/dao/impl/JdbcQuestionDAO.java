@@ -6,10 +6,12 @@ import com.mindit.forum.dto.QuestionDTO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.jdbc.core.RowMapper;
 import org.springframework.jdbc.core.namedparam.MapSqlParameterSource;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.stereotype.Repository;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -241,7 +243,7 @@ public class JdbcQuestionDAO implements QuestionDAO {
 
 
     @Override
-    public List<QuestionDTO> search(String input){
+    public List<QuestionDTO> searchQuest(String input){
 
         String sqlSelect = "" +
                 "SELECT " +
@@ -268,6 +270,37 @@ public class JdbcQuestionDAO implements QuestionDAO {
 
         return null;
 
+    }
+
+    @Override
+    public QuestionDTO getQuestion(int id){
+        String sqlSelect = "" +
+                "SELECT " +
+                "    * " +
+                "FROM question " +
+                "WHERE quest_id = " + id;
+
+        MapSqlParameterSource namedParameters = new MapSqlParameterSource();
+
+        QuestionDTO questionDTO = null;
+        try {
+            questionDTO = namedJdbcTemplate.queryForObject(sqlSelect, namedParameters, new QuestionDTOMapper());
+        } catch (EmptyResultDataAccessException ignored) {
+
+        }
+
+        return questionDTO;
+    }
+
+    class QuestionDTOMapper implements RowMapper<QuestionDTO> {
+        @Override
+        public QuestionDTO mapRow(ResultSet rs, int rowNum) throws SQLException {
+            QuestionDTO question = new QuestionDTO();
+            question.setQuestId(rs.getInt("quest_id"));
+            question.setUserName( rs.getString("username"));
+            question.setQuestText(rs.getString("quest_text"));
+            return question;
+        }
     }
 
 }
