@@ -63,11 +63,12 @@
                 .then(function(response){
                     $rootScope.usr = vm.luserName;
                     $rootScope.dsp = true;
+                    $rootScope.flag = 0;
                     $('#myModal').modal('toggle');
                     $state.go("home",true);
 
                 }, function () {
-                    $scope.fail = "Username or passsword is incorrect!"
+                    $scope.fail = "Username or passsword is incorrect!";
                     vm.luserName = "";
                     vm.lpassword = "";
                 });
