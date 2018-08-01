@@ -23,9 +23,10 @@
         var vm = this;
 
         function init(){
+            $rootScope.flag = 0;
             vm.editMode = false;
-            var un = localStorage.getItem("username");
-            var display = localStorage.getItem("display");
+            var un = sessionStorage.getItem("username");
+            var display = sessionStorage.getItem("display");
 
             if(un !=null && display !=null && $rootScope.usr==null){
                 $rootScope.dsp = display;
@@ -37,8 +38,8 @@
         init();
 
         window.onbeforeunload = function (ev) {
-            localStorage.setItem("username", $rootScope.usr);
-            localStorage.setItem("display", $rootScope.dsp);
+            sessionStorage.setItem("username", $rootScope.usr);
+            sessionStorage.setItem("display", $rootScope.dsp);
         }
 
         vm.search = function(){
@@ -237,7 +238,11 @@
         vm.LogOut = function () {
 
             $rootScope.dsp = null;
+            $rootScope.flag = 1;
             $rootScope.usr = "";
+            sessionStorage.removeItem("username");
+            sessionStorage.removeItem("display");
+            sessionStorage.clear();
             $state.go("home", true);
 
         }

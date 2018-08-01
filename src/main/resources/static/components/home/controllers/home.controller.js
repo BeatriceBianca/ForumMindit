@@ -24,8 +24,10 @@
 
         var vm = this;
         function init(){
-
-
+            if($rootScope.flag == null){
+                $rootScope.flag = sessionStorage.getItem("flag");
+            }
+            alert($rootScope.flag);
 
             HomeService.bringQuestions()
                 .then(function(response){
@@ -35,11 +37,29 @@
             })
 
             if($rootScope.usr == ""){
+                sessionStorage.clear();
                 window.location.reload();
             }
 
+            var un = sessionStorage.getItem("username");
+            var display = sessionStorage.getItem("display");
+            if($rootScope.usr == null && $rootScope.flag == 0)
+                if(un != null && display != null){
+                    $rootScope.dsp = display;
+                    $rootScope.usr = un;
+                } else {
+
+                }
+
         }
+
         init();
+
+        window.onbeforeunload = function (ev) {
+            sessionStorage.setItem("flag", $rootScope.flag);
+            sessionStorage.setItem("username", $rootScope.usr);
+            sessionStorage.setItem("display", $rootScope.dsp);
+        }
 
         vm.modal = function (question) {
             vm.selectedQuestion = question;
@@ -117,8 +137,6 @@
                     else {
 
                 }
-
-
 
         }
 
