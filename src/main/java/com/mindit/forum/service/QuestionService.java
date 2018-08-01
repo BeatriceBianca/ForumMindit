@@ -15,5 +15,6 @@ public interface QuestionService {
     Boolean deleteQuestion(QuestionDTO questionDTO);
     Boolean updateQuestion(QuestionDTO questionDTO);
     List<QuestionDTO> getMyQuestions(String username);
-    List<QuestionDTO> search(String input);
+    List<QuestionDTO> searchQuest(String input);
+    QuestionDTO getQuestion(int id);
 }

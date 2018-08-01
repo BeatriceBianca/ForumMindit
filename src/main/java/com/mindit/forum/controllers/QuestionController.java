@@ -88,13 +88,23 @@ public class QuestionController {
         else return new ResponseEntity(myQuestions,HttpStatus.OK);
     }
 
-    @RequestMapping(value = "/search", method = RequestMethod.GET)
-    public ResponseEntity search(@RequestParam(value="input") String input){
-        List<QuestionDTO> result = questionService.search(input);
+    @RequestMapping(value = "/searchQuest", method = RequestMethod.GET)
+    public ResponseEntity searchQuest(@RequestParam(value="input") String input){
+        List<QuestionDTO> result = questionService.searchQuest(input);
         if(result.size() == 0)
             return new ResponseEntity(null,HttpStatus.BAD_REQUEST);
         else return new ResponseEntity(result,HttpStatus.OK);
 
     }
+
+
+    @RequestMapping(value = "/getQuestion", method = RequestMethod.GET)
+    public ResponseEntity getQuestion(@RequestParam(value="id") int id){
+        QuestionDTO question = questionService.getQuestion(id);
+         return new ResponseEntity(question,HttpStatus.OK);
+
+    }
+
+
 
 }

@@ -10,5 +10,6 @@ public interface AnswerService {
     List<AnswerDTO> getAllAnswers(int id);
     Boolean deleteAnswer(AnswerDTO answerDTO);
     Boolean updateAnswer(AnswerDTO answerDTO);
+    List<AnswerDTO> searchAns(String input);
 
 }

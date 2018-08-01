@@ -27,13 +27,22 @@
             </div>
         </div>
 
-        <div data-toggle="modal" data-target="#myModal1" ng-repeat="x in ppCtrl.result" class="rep">
+        <div data-toggle="modal" data-target="#myModal1" ng-repeat="x in ppCtrl.result1" ng-click="ppCtrl.modal(x)" class="rep">
 
             <div>
                 {{ x.questText}}
             </div>
 
         </div>
+
+        <div data-toggle="modal" data-target="#myModal3" ng-repeat="y in ppCtrl.result2" class="rep" ng-click="ppCtrl.modal3(y)">
+
+            <div>
+                {{ y.ansText}}
+            </div>
+
+        </div>
+
     </div>
 
 
@@ -143,6 +152,32 @@
                 </div>
             </div>
 
+        </div>
+    </div>
+
+
+
+
+    <div id="myModal3" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title"> {{ ppCtrl.quest.questText }} </h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <div ng-repeat="w in ppCtrl.ans">
+                        <p>{{ w.userName }}: {{ w.ansText}} </p>
+                    </div>
+
+                </div>
+
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal" >Close</button>
+                </div>
+            </div>
         </div>
     </div>
 

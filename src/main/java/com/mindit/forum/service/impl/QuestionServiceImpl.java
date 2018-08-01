@@ -55,8 +55,12 @@ public class QuestionServiceImpl implements QuestionService {
         return questionDAO.getMyQuestions(username);
     }
 
-    public List<QuestionDTO> search(String input){
-        return questionDAO.search(input);
+    public List<QuestionDTO> searchQuest(String input){
+        return questionDAO.searchQuest(input);
+    }
+
+    public QuestionDTO getQuestion(int id){
+        return questionDAO.getQuestion(id);
     }
 
 }

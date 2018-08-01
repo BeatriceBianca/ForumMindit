@@ -42,16 +42,29 @@
         }
 
         vm.search = function(){
-            vm.result = "";
-            ProfilePageService.search(vm.input)
+            vm.result1 = "";
+            vm.result2 = "";
+
+            ProfilePageService.searchQuest(vm.input)
                 .then(function (response) {
 
-                    vm.result = response.data;
+                    vm.result1 = response.data;
                     vm.questions = "";
                     vm.myquestions = "";
                     vm.myAnsQuests = "";
 
                 })
+
+            ProfilePageService.searchAns(vm.input)
+                .then(function (response2) {
+
+                    vm.result2 = response2.data;
+                    vm.questions = "";
+                    vm.myquestions = "";
+                    vm.myAnsQuests = "";
+
+                })
+
 
         }
 
@@ -96,6 +109,8 @@
                     vm.myAnsQuests = "";
                     vm.result = "";
                     vm.show = true;
+                    vm.result1 = "";
+                    vm.result2 = "";
                 })
         }
 
@@ -132,6 +147,20 @@
             vm.selectedAnswer = answer;
         }
 
+        vm.modal3 = function(answer){
+            vm.selectedAnswer = answer;
+            ProfilePageService.question(vm.selectedAnswer.qId)
+                .then(function (response) {
+                    vm.quest = response.data;
+                    ProfilePageService.answer(vm.quest.questId)
+                        .then(function (response) {
+                            vm.ans = response.data;
+                        })
+                })
+
+        }
+
+
 
         $(document).ready(function(){
 
@@ -151,6 +180,14 @@
                      vm.myAnsQuests = "";
                      vm.result = "";
                      vm.show = false;
+                     vm.result1 = "";
+                     vm.result2 = "";
+                 }, function (reason) {
+                     vm.questions = "";
+                     vm.myAnsQuests = "";
+                     vm.result = "";
+                     vm.result1 = "";
+                     vm.result2 = "";
                  })
         }
 
@@ -186,10 +223,14 @@
                     vm.questions = "";
                     vm.result = "";
                     vm.show = false;
+                    vm.result1 = "";
+                    vm.result2 = "";
                 }, function (reason) {
                     vm.myquestions = "";
                     vm.questions = "";
                     vm.show = false;
+                    vm.result1 = "";
+                    vm.result2 = "";
                 })
         }
 

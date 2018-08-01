@@ -17,5 +17,6 @@ public interface QuestionDAO {
     void deleteQuestion(QuestionDTO questionDTO);
     void updateQuestion(QuestionDTO questionDTO);
     List<QuestionDTO> getMyQuestions(String username);
-    List<QuestionDTO> search(String input);
+    List<QuestionDTO> searchQuest(String input);
+    QuestionDTO getQuestion(int id);
 }
