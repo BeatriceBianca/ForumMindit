@@ -45,26 +45,25 @@
             vm.result1 = "";
             vm.result2 = "";
 
-            ProfilePageService.searchQuest(vm.input)
-                .then(function (response) {
+                ProfilePageService.searchQuest(vm.input)
+                    .then(function (response) {
 
-                    vm.result1 = response.data;
-                    vm.questions = "";
-                    vm.myquestions = "";
-                    vm.myAnsQuests = "";
+                        vm.result1 = response.data;
+                        vm.questions = "";
+                        vm.myquestions = "";
+                        vm.myAnsQuests = "";
 
-                })
+                    })
 
-            ProfilePageService.searchAns(vm.input)
-                .then(function (response2) {
+            if(vm.input !== "") {
+                ProfilePageService.searchAns(vm.input)
+                    .then(function (response2) {
+                        vm.result2 = response2.data;
+                    })
+            }
+            else{
 
-                    vm.result2 = response2.data;
-                    vm.questions = "";
-                    vm.myquestions = "";
-                    vm.myAnsQuests = "";
-
-                })
-
+            }
 
         }
 
